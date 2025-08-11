@@ -36,4 +36,4 @@ if st.button("Generate New Quote"):
     st.session_state.quote = random.choice(quotes)
 
 # Show quote as big header
-st.markdown(f"<h1 style='color: white; text-shadow: 2px 2px 4px #000000;'>{st.session_state.quote}</h1>", unsafe_
+st.markdown(f"<h1 style='color: white; text-shadow: 2px 2px 4px #000000;'>{st.session_state.quote}</h1>", unsafe_allow_html=True)
