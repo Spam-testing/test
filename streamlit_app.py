@@ -1,18 +1,28 @@
 import streamlit as st
 import random
-import string
 
-def generate_code(length=8):
-    chars = string.ascii_uppercase + string.digits
-    return ''.join(random.choice(chars) for _ in range(length))
+# List of quotes
+quotes = [
+    "The best way to get started is to quit talking and begin doing.",
+    "Don’t let yesterday take up too much of today.",
+    "You learn more from failure than from success.",
+    "It’s not whether you get knocked down, it’s whether you get up.",
+    "If you are working on something exciting, it will keep you motivated.",
+    "Success is not in what you have, but who you are.",
+    "Your limitation—it’s only your imagination.",
+    "Push yourself, because no one else is going to do it for you.",
+    "Great things never come from comfort zones.",
+    "Dream it. Wish it. Do it."
+]
 
-# Initialize the code in session state if it doesn't exist
-if "code" not in st.session_state:
-    st.session_state.code = generate_code()
+st.title("Random Quote Generator")
 
-st.title("Random Code Generator")
+# Initialize or get current quote from session state
+if "quote" not in st.session_state:
+    st.session_state.quote = random.choice(quotes)
 
-if st.button("Generate New Code"):
-    st.session_state.code = generate_code()
+# Small button to generate a new quote
+if st.button("Generate New Quote"):
+    st.session_state.quote = random.choice(quotes)
 
-st.write(f"**Your random code:** {st.session_state.code}")
+st.write(f"> {st.session_state.quote}")
