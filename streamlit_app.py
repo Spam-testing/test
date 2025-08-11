@@ -1,7 +1,6 @@
 import streamlit as st
 import random
 
-# List of quotes
 quotes = [
     "The best way to get started is to quit talking and begin doing.",
     "Don’t let yesterday take up too much of today.",
@@ -15,14 +14,26 @@ quotes = [
     "Dream it. Wish it. Do it."
 ]
 
-st.title("Random Quote Generator")
+# Set a nice background image with CSS
+page_bg_img = '''
+<style>
+body {
+background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
+'''
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Initialize or get current quote from session state
+# Pick or get the current quote
 if "quote" not in st.session_state:
     st.session_state.quote = random.choice(quotes)
 
-# Small button to generate a new quote
 if st.button("Generate New Quote"):
     st.session_state.quote = random.choice(quotes)
 
-st.write(f"> {st.session_state.quote}")
+# Show quote as big header
+st.markdown(f"<h1 style='color: white; text-shadow: 2px 2px 4px #000000;'>{st.session_state.quote}</h1>", unsafe_
