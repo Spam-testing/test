@@ -14,20 +14,45 @@ quotes = [
     "Dream it. Wish it. Do it."
 ]
 
-# Gradient background CSS
-gradient_bg = '''
+# Gradient background CSS for whole page and transparent Streamlit containers
+page_bg_style = """
 <style>
-body {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Make the whole page background a colorful gradient */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    min-height: 100vh;
+}
+
+/* Make the main content container transparent so background shows through */
+[data-testid="stMainContainer"] {
+    background-color: rgba(255, 255, 255, 0.0);
+    padding-top: 50px;
+}
+
+/* Center and style the button */
+.stButton > button {
+    background-color: #ff7e5f;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: #feb47b;
+}
+
+/* Style the quote text */
+h1 {
+    color: white !important;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    text-align: center;
 }
 </style>
-'''
+"""
 
-st.markdown(gradient_bg, unsafe_allow_html=True)
+st.markdown(page_bg_style, unsafe_allow_html=True)
 
 # Initialize or get current quote from session state
 if "quote" not in st.session_state:
@@ -36,8 +61,5 @@ if "quote" not in st.session_state:
 if st.button("Generate New Quote"):
     st.session_state.quote = random.choice(quotes)
 
-# Show quote as a big header with white color and shadow for readability
-st.markdown(
-    f"<h1 style='color: white; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); text-align:center; margin-top: 100px;'>{st.session_state.quote}</h1>", 
-    unsafe_allow_html=True
-)
+# Show quote as big header
+st.markdown(f"<h1>{st.session_state.quote}</h1>", unsafe_allow_html=True)
