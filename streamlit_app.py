@@ -14,26 +14,30 @@ quotes = [
     "Dream it. Wish it. Do it."
 ]
 
-# Set a nice background image with CSS
-page_bg_img = '''
+# Gradient background CSS
+gradient_bg = '''
 <style>
 body {
-background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>
 '''
-st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Pick or get the current quote
+st.markdown(gradient_bg, unsafe_allow_html=True)
+
+# Initialize or get current quote from session state
 if "quote" not in st.session_state:
     st.session_state.quote = random.choice(quotes)
 
 if st.button("Generate New Quote"):
     st.session_state.quote = random.choice(quotes)
 
-# Show quote as big header
-st.markdown(f"<h1 style='color: white; text-shadow: 2px 2px 4px #000000;'>{st.session_state.quote}</h1>", unsafe_allow_html=True)
+# Show quote as a big header with white color and shadow for readability
+st.markdown(
+    f"<h1 style='color: white; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); text-align:center; margin-top: 100px;'>{st.session_state.quote}</h1>", 
+    unsafe_allow_html=True
+)
